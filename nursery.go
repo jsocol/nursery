@@ -37,7 +37,7 @@ func Open(ctx context.Context, init Initializer) error {
 	doneChan := make(chan struct{})
 	go func() {
 		n.cond.L.Lock()
-		for n.started.Load() && n.running.Load() > 0 {
+		for !n.started.Load() || n.running.Load() > 0 {
 			n.cond.Wait()
 		}
 		close(doneChan)
