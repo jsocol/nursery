@@ -141,6 +141,7 @@ func ExampleOpen() {
 		})
 
 		n.Start(func(ctx context.Context) error {
+			time.Sleep(time.Millisecond)
 			fmt.Println("I always happen")
 			return nil
 		})
